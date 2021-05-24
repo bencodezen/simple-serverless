@@ -8,16 +8,31 @@
   </head>
   <body>
     <h1>Simple Serverless Site</h1>
+    <p id="response">Response</p>
     <button id="call-btn">Call Serverless</button>
+    <button id="call-pokedex">Call Pokedex</button>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const btn = document.getElementById('call-btn')
+        const text = document.getElementById('response')
+        const poke = document.getElementById('call-pokedex')
 
         btn.addEventListener('click', () => {
-          fetch('/netlify/functions/simple-api').then(response => {
-            console.log(response)
-          })
+          fetch('/.netlify/functions/simple-api')
+            .then(res => res.json())
+            .then(data => {
+              text.innerText = data.message
+              console.log(data)
+            })
+        })
+
+        poke.addEventListener('click', async () => {
+          console.log('hello')
+          const response = await fetch('/.netlify/functions/pokedex')
+          const { data } = await response.json()
+
+          console.log({ data })
         })
       })
     </script>

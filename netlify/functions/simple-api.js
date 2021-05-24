@@ -2,7 +2,12 @@ exports.handler = async function (event, context) {
   try {
     console.log({ event })
     console.log({ context })
-    return { statusCode: 200, body: JSON.stringify({ data }) }
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: 'Hello world'
+      })
+    }
   } catch (error) {
     console.log(error)
     return {
